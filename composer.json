@@ -23,9 +23,6 @@
             "providers": [
                 "FgutierrezPHP\\AddresesRd\\AddressRdServiceProvider"
             ]
-        },
-        "branch-alias": {
-            "dev-master": "main"
         }
     }    
 }
