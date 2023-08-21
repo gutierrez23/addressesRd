@@ -2,7 +2,7 @@
 
 namespace FgutierrezPHP\AddresesRd\Models;
 
-use App\Http\Filters\MunicipalityFilter;
+use FgutierrezPHP\AddresesRd\Http\Filters\MunicipalityFilter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

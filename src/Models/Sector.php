@@ -2,7 +2,7 @@
 
 namespace FgutierrezPHP\AddresesRd\Models;
 
-use App\Http\Filters\SectorFilter;
+use FgutierrezPHP\AddresesRd\Http\Filters\SectorFilter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

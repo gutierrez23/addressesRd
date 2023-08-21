@@ -3,12 +3,12 @@
 namespace FgutierrezPHP\AddresesRd\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Filters\MunicipalityFilter;
-use App\Http\Filters\SectorFilter;
-use App\Http\Requests\SectorRequest;
-use App\Http\Resources\SectorResource;
-use App\Models\Sector;
-use App\Traits\InteractsWithHttpResponse;
+use FgutierrezPHP\AddresesRd\Http\Filters\MunicipalityFilter;
+use FgutierrezPHP\AddresesRd\Http\Filters\SectorFilter;
+use FgutierrezPHP\AddresesRd\Http\Requests\SectorRequest;
+use FgutierrezPHP\AddresesRd\Http\Resources\SectorResource;
+use FgutierrezPHP\AddresesRd\Models\Sector;
+use FgutierrezPHP\AddresesRd\Traits\InteractsWithHttpResponse;
 use Illuminate\Http\Request;
 
 class SectorController extends Controller

@@ -4,26 +4,17 @@ namespace FgutierrezPHP\AddresesRd\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Filters\MunicipalityFilter;
-use App\Http\Requests\MunicipalityRequest;
-use App\Http\Resources\MunicipalityResource;
-use App\Models\Municipality;
-use App\Traits\InteractsWithHttpResponse;
+use FgutierrezPHP\AddresesRd\Http\Filters\MunicipalityFilter;
+use FgutierrezPHP\AddresesRd\Http\Requests\MunicipalityRequest;
+use FgutierrezPHP\AddresesRd\Http\Resources\MunicipalityResource;
+use FgutierrezPHP\AddresesRd\Models\Municipality;
+use FgutierrezPHP\AddresesRd\Traits\InteractsWithHttpResponse;
 use Illuminate\Http\Request;
 
 class MunicipalityController extends Controller
 {
     use InteractsWithHttpResponse;
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('locations.municipality.index');
-    }
-
+ 
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +29,6 @@ class MunicipalityController extends Controller
         }else{
             $municipalities = Municipality::filter($filter)->get();
         }
-
         return MunicipalityResource::collection($municipalities);
     }
 
