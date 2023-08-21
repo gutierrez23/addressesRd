@@ -1,0 +1,16 @@
+{
+    "name": "fgutierrezphp/addreses_rd",
+    "description": "Addreses RD",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Fernando Gutierrez",
+            "email": "fgutierrezphp@gmail.com",
+            "homepage": "https://github.com/gutierrez23",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    }
+}
