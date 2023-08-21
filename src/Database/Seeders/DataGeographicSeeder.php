@@ -25,12 +25,12 @@ class DataGeographicSeeder extends Seeder
             
             $this->insertProvinces('data/provinces.json');
 
-            // if(Province::count()){
+            if(Province::count()){
                 $this->insertMunicipalities('data/municipios.json');
-            // }
-            // if(Municipality::count()){
+            }
+            if(Municipality::count()){
                 $this->insertSector('data/sectores.json');
-            // }
+            }
             
         } catch (\Exception $e) {
             dump($e->getMessage());
@@ -54,7 +54,6 @@ class DataGeographicSeeder extends Seeder
         $provinces  = Province::all();
         collect($json)->map(function($municipality) use ($provinces) {
             collect($provinces)->contains(function ($value, $key) use ($municipality) {
-                dump($value->province_id === $municipality['provincia_id']);
                 if($value->province_id === $municipality['provincia_id']){
                     
                     Municipality::create([
@@ -80,7 +79,7 @@ class DataGeographicSeeder extends Seeder
             Sector::insert($sectorArrayTmp->map(function($sector) use ($municipality){
                 return [
                     'name' => $sector->sector,
-                    'municipio_id' => $municipality->id,
+                    'municipality_id' => $municipality->id,
                 ];
             })->toArray());
         });
