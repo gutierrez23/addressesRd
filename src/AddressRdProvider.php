@@ -35,11 +35,11 @@ class AddressRdProvider extends ServiceProvider
         // Load Migrations
         $this->loadMigrationsFrom(__DIR__.'/Database/migrations');
         // Publish Migrations
-        if (!Schema::hasTable(config('addreses_rd.tables_prefix') . 'provinces')) {
+        // if (!Schema::hasTable(config('addreses_rd.tables_prefix') . 'provinces')) {
             $this->publishes([
                 __DIR__.'/Database/migrations/create_addresses_rd_migration.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_addresses_rd_migration.php'),
             ], 'migrations');
-        }
+        // }
         // Load Commands
         if ($this->app->runningInConsole()) {
             $this->commands([

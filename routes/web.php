@@ -4,9 +4,10 @@ use FgutierrezPHP\AddresesRd\Http\Controllers\ProvinceController;
 use FgutierrezPHP\AddresesRd\Http\Controllers\MunicipalityController;
 use FgutierrezPHP\AddresesRd\Http\Controllers\SectorController;
 
+$prefix = config('addreses_rd.url_prefix');
 
 // Locations
-Route::prefix('addresses')->group(function () {
+Route::prefix($prefix)->group(function () {
   // Province
   Route::prefix('provincias')->group(function(){
       Route::get('/', [ProvinceController::class, 'get']); 

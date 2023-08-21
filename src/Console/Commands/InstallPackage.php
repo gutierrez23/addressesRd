@@ -12,7 +12,7 @@ class InstallPackage extends Command
      *
      * @var string
      */
-    protected $signature = 'install:package';
+    protected $signature = 'install:addreses';
 
     /**
      * The console command description.
