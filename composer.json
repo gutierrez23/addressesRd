@@ -2,6 +2,7 @@
     "name": "fgutierrezphp/addreses_rd",
     "description": "Addreses RD",
     "type": "library",
+    "license": "GPL-3.0",
     "authors": [
         {
             "name": "Fernando Gutierrez",
