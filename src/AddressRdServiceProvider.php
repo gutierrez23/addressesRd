@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use FgutierrezPHP\AddresesRd\Database\Seeds\DataGeographicSeeder;
 use FgutierrezPHP\AddresesRd\Console\Commands\InstallPackage;
 
-class AddressRdProvider extends ServiceProvider
+class AddressRdServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

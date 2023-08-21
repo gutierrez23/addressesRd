@@ -17,5 +17,15 @@
         "psr-4": {
             "FgutierrezPHP\\AddresesRd\\": "src/"
         }
-    }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FgutierrezPHP\\AddresesRd\\AddressRdServiceProvider"
+            ]
+        },
+        "branch-alias": {
+            "dev-master": "main"
+        }
+    }    
 }
