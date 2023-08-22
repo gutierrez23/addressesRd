@@ -31,7 +31,7 @@ class AddressRdServiceProvider extends ServiceProvider
             __DIR__.'/../config/addreses_rd.php' => config_path('addreses_rd.php'),
         ]);
         // Load Routes
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         // Load Migrations
         $this->loadMigrationsFrom(__DIR__.'/Database/migrations');
         // Publish Migrations

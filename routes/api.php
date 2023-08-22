@@ -7,7 +7,7 @@ use FgutierrezPHP\AddresesRd\Http\Controllers\SectorController;
 $prefix = config('addreses_rd.url_prefix');
 
 // Locations
-Route::prefix($prefix)->group(function () {
+Route::prefix('api/'.$prefix)->group(function () {
   // Province
   Route::prefix('provincias')->group(function(){
       Route::get('/', [ProvinceController::class, 'get']); 
