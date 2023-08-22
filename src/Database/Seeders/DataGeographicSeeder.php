@@ -4,10 +4,10 @@ namespace FgutierrezPHP\AddresesRd\Database\Seeders;
 use FgutierrezPHP\AddresesRd\Models\Municipality;
 use FgutierrezPHP\AddresesRd\Models\Province;
 use FgutierrezPHP\AddresesRd\Models\Sector;
-use FgutierrezPHP\AddresesRd\Models\SectorTemp;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Support\Facades\File;
 
 class DataGeographicSeeder extends Seeder
 {
@@ -18,71 +18,43 @@ class DataGeographicSeeder extends Seeder
      */
     public function run()
     {
-        try {
+        try { 
             Province::truncate();
             Municipality::truncate();
             Sector::truncate();
-            
-            $this->insertProvinces('data/provinces.json');
-
-            if(Province::count()){
-                $this->insertMunicipalities('data/municipios.json');
-            }
-            if(Municipality::count()){
-                $this->insertSector('data/sectores.json');
-            }
-            
+            $file = dirname(dirname(dirname(__DIR__))).'/resources/files/territorial_division.json';
+            $this->insertProvinces($file);
         } catch (\Exception $e) {
             dump($e->getMessage());
         }
     }
 
     protected function insertProvinces($file){
-        $content    = Storage::disk('local')->get($file);
+        $content    = File::get($file);
         $json       = json_decode($content, true);
-        collect($json)->map(function($province) { 
-            Province::create([
-                'name' => $province['provincia'],
-                'province_id' => $province['provincia_id'],
+
+        collect($json['data'])->map(function($value) { 
+            $province = Province::create(['name' => $value['name']]);
+            $this->insertMunicipalities($province->id, $value['municipalities']);
+        });
+    }
+
+    protected function insertMunicipalities($province, $municipalities){     
+        collect($municipalities)->map(function($value) use ($province) {
+            $municipality = Municipality::create([
+                'province_id' => $province,
+                'name' => $value['name']
+            ]);
+            $this->insertSector($municipality->id, $value['sectors']);
+        });
+    }
+
+    protected function insertSector($municipality, $sectors){
+        collect($sectors)->map(function($sector) use ($municipality){
+            Sector::create([
+                'municipality_id' => $municipality,
+                'name' => $sector['name']
             ]);
         });
-    }
-
-    protected function insertMunicipalities($file){
-        $content    = Storage::disk('local')->get($file);
-        $json       = json_decode($content, true);
-        $provinces  = Province::all();
-        collect($json)->map(function($municipality) use ($provinces) {
-            collect($provinces)->contains(function ($value, $key) use ($municipality) {
-                if($value->province_id === $municipality['provincia_id']){
-                    
-                    Municipality::create([
-                        'name' => $municipality['minicipio'],
-                        'province_id' => $value->id,
-                        'municipio_id' => $municipality['minicipio_id']
-                    ]);
-                };
-            });
-        });
-    }
-
-    protected function insertSector($file){
-        $content        = Storage::disk('local')->get($file);
-        $json           = json_decode($content, true);
-        $municipalities = Municipality::all();
-        if(!Sector::count() && !SectorTemp::count())
-        {
-            SectorTemp::insert($json);
-        }
-        collect($municipalities)->map(function($municipality){
-            $sectorArrayTmp = $municipality->sectorTemp;
-            Sector::insert($sectorArrayTmp->map(function($sector) use ($municipality){
-                return [
-                    'name' => $sector->sector,
-                    'municipality_id' => $municipality->id,
-                ];
-            })->toArray());
-        });
-        SectorTemp::truncate();
     }
 }
